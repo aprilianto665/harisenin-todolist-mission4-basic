@@ -262,8 +262,8 @@ header h1 {
   font-size: 10px;
   opacity: 0.7;
   line-height: 1.4;
-  word-wrap: break-word;
   overflow-wrap: break-word;
+  white-space: nowrap;
 }
 
 .priority {
@@ -390,16 +390,36 @@ select:focus {
   color: #000;
 }
 
-.completed-header {
+.completed-header,
+.todo-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
+.date-filter {
+  font-family: "Space Mono", monospace;
+  background: #ffffff;
+  border: 3px solid #000;
+  padding: 8px 12px;
+  font-size: 14px;
+  box-shadow: 4px 4px 0px #000;
+  cursor: pointer;
+  width: 180px;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.date-filter:focus {
+  outline: none;
+  border-color: #ff5757;
+  box-shadow: 6px 6px 0px #000;
+}
+
 .delete-all-btn {
   font-family: "Space Mono", monospace;
-  padding: 12px 20px;
+  padding: 8px 12px;
   border: 3px solid #000;
   background: #ff5757;
   color: #000;
@@ -410,6 +430,9 @@ select:focus {
   box-shadow: 4px 4px 0px #000;
   transition: transform 0.1s, box-shadow 0.1s;
   display: none;
+  width: 180px;
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .delete-all-btn:hover {
@@ -551,37 +574,67 @@ select:focus {
   padding: 15px;
   border: 5px solid #000;
   box-shadow: 8px 8px 0px #000;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 15px 15px;
 }
 
 .stat-card.overdue {
   background: #ff4757;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 15px 15px;
 }
 
 .stat-card.high {
   background: #ff4757;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 15px 15px;
 }
 
 .stat-card.medium {
   background: #ffcc01;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 15px 15px;
 }
 
 .stat-card.low {
   background: #7bed9f;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 15px 15px;
 }
 
 .stat-card.done {
   background: #ff9cee;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 15px 15px;
 }
 
@@ -660,6 +713,7 @@ select:focus {
   .item {
     width: calc(50% - 16px);
     margin: 8px;
+    margin-top: 20px;
     min-height: 120px;
   }
 
