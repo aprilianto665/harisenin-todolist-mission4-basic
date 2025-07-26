@@ -126,6 +126,23 @@ const removeAllCompletedTasks = () => {
   saveData();
 };
 
+const updateStatistics = () => {
+  const activeTodos = todos.filter((todo) => !todo.isCompleted);
+  const completedTodos = todos.filter((todo) => todo.isCompleted);
+  
+  const overdueCount = activeTodos.filter(todo => isOverdue(todo.deadline)).length;
+  const highCount = activeTodos.filter(todo => !isOverdue(todo.deadline) && todo.priority === 'High').length;
+  const mediumCount = activeTodos.filter(todo => !isOverdue(todo.deadline) && todo.priority === 'Medium').length;
+  const lowCount = activeTodos.filter(todo => !isOverdue(todo.deadline) && todo.priority === 'Low').length;
+  const doneCount = completedTodos.length;
+  
+  document.getElementById('overdue-count').textContent = overdueCount;
+  document.getElementById('high-count').textContent = highCount;
+  document.getElementById('medium-count').textContent = mediumCount;
+  document.getElementById('low-count').textContent = lowCount;
+  document.getElementById('done-count').textContent = doneCount;
+};
+
 const updateCurrentTime = () => {
   const now = new Date();
   const dayName = now.toLocaleDateString("id-ID", { weekday: "long" });
@@ -134,10 +151,15 @@ const updateCurrentTime = () => {
     month: "long",
     year: "numeric",
   });
+  const timeString = now.toLocaleTimeString("id-ID", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
 
   const timeElement = document.getElementById("current-time");
   if (timeElement) {
-    timeElement.innerHTML = `<h3>${dayName}</h3><p>${dateString}</p>`;
+    timeElement.innerHTML = `<h3>${dayName}</h3><p>${dateString}</p><p>${timeString}</p>`;
   }
 };
 
@@ -156,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("delete-all-btn").onclick = removeAllCompletedTasks;
 
   updateCurrentTime();
-  setInterval(updateCurrentTime, 60000);
+  setInterval(updateCurrentTime, 1000);
   loadDataFromStorage();
 });
 
@@ -185,4 +207,6 @@ document.addEventListener(RENDER_EVENT, () => {
 
   document.getElementById("delete-all-btn").style.display =
     completedTodos.length > 0 ? "block" : "none";
+    
+  updateStatistics();
 });
