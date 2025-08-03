@@ -54,6 +54,7 @@ const makeTodo = ({ id, task, priority, deadline, isCompleted }) => {
   container.style.backgroundColor = getPostItColor(id);
 
   container.innerHTML = `
+    <button class="delete-btn" onclick="deleteTodo(${id})">&times;</button>
     <div class="inner">
       <h2>${task}</h2>
       <span class="priority priority-${displayPriority.toLowerCase()}">${displayPriority}</span>
@@ -102,6 +103,17 @@ const toggleTodoStatus = (todoId, isCompleted) => {
     saveData();
   }
 };
+
+const deleteTodo = (todoId) => {
+  const index = todos.findIndex((todo) => todo.id === todoId);
+  if (index !== -1) {
+    todos.splice(index, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
+  }
+};
+
+window.deleteTodo = deleteTodo;
 
 const removeAllCompletedTasks = () => {
   todos.splice(0, todos.length, ...todos.filter((todo) => !todo.isCompleted));
